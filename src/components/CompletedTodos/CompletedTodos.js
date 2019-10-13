@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FirebaseContext } from 'context/firebase'
-import { completedStyles } from 'AppStyles'
+import { completedStyles } from 'styles'
 
 export default function CompletedTodos() {
 	const todos = useContext(FirebaseContext)

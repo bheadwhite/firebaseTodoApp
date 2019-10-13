@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { listStyles } from 'AppStyles'
+import { listStyles } from 'styles'
 
 export default function ListTodos() {
 	const classes = listStyles()
