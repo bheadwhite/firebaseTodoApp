@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const listStyles = makeStyles({
   complete: {
     textDecoration: "line-through"
   },
@@ -12,4 +12,17 @@ const useStyles = makeStyles({
   item: {}
 });
 
-export { useStyles };
+const completedStyles = makeStyles({
+  completed: {
+    color: 'white',
+    fontSize: '1.3rem',
+    textAlign: 'left',
+    listStyle: ''
+  },
+  title: {
+    color: 'red',
+    textDecoration: 'underline'
+  }
+})
+
+export { listStyles, completedStyles };
