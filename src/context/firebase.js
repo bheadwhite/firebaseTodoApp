@@ -1,4 +1,4 @@
-import React, { createContext } from "react"
+import React, { createContext, useState } from 'react'
 import * as firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -15,11 +15,27 @@ var config = {
 
 firebase.initializeApp(config)
 const FirebaseContext = createContext()
+const firebaseTodos = firebase.firestore().collection('todos')
 
 const FirebaseProvider = props => {
-	const firestore = firebase.firestore()
-
-	return <FirebaseContext.Provider value={{firestore}}>{props.children}</FirebaseContext.Provider>
+	const [todos, setTodos] = useState([])
+	//similar to DidUpdate Lifecycle, onSnapshot updates context todos from DB
+	firebaseTodos.onSnapshot(docs => {
+		let DBtodos = []
+		docs.forEach(doc => {
+			let myTodo = doc.data()
+			myTodo.id = doc.id
+			DBtodos = [...DBtodos, myTodo]
+		})
+		if (DBtodos.length !== todos.length) {
+			setTodos(DBtodos)
+		}
+	})
+	return (
+		<FirebaseContext.Provider value={todos}>
+			{props.children}
+		</FirebaseContext.Provider>
+	)
 }
 
-export { FirebaseContext, FirebaseProvider }
+export { FirebaseContext, FirebaseProvider, firebaseTodos }
